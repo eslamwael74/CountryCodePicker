@@ -291,12 +291,6 @@ const List<Map<String, String>> codes = [
   {"name": "नेपाल", "code": "NP", "iso3Code": "NPL", "dial_code": "+977"},
   {"name": "Nederland", "code": "NL", "iso3Code": "NLD", "dial_code": "+31"},
   {
-    "name": "Netherlands Antilles",
-    "code": "AN",
-    "iso3Code": "AN",
-    "dial_code": "+599"
-  },
-  {
     "name": "Nouvelle-Calédonie",
     "code": "NC",
     "iso3Code": "NCL",

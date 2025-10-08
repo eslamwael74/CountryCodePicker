@@ -1,3 +1,7 @@
+## 3.4.1 - October 08 2025
+- Fix French country translations
+- Removed Netherlands Antilles from country codes list
+
 ## 3.4.0 - August 19 2025
 - Fix China translation
 - Adding flag autofocus
