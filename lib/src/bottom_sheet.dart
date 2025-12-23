@@ -28,6 +28,9 @@ class SelectionBottomSheet extends StatefulWidget {
   /// elements passed as favorite
   final List<CountryCode> favoriteElements;
 
+  /// Optional header widget
+  final Widget? headerWidget;
+
   SelectionBottomSheet(
     this.elements,
     this.favoriteElements, {
@@ -46,6 +49,7 @@ class SelectionBottomSheet extends StatefulWidget {
     this.barrierColor,
     this.hideSearch = false,
     this.closeIcon,
+    this.headerWidget,
   })  : searchDecoration = searchDecoration.prefixIcon == null
             ? searchDecoration.copyWith(prefixIcon: const Icon(Icons.search))
             : searchDecoration,
@@ -70,7 +74,10 @@ class _SelectionBottomSheetState extends State<SelectionBottomSheet> {
           decoration: widget.boxDecoration ??
               BoxDecoration(
                 color: widget.backgroundColor ?? Colors.white,
-                borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(16.0),
+                  topRight: Radius.circular(16.0),
+                ),
                 boxShadow: [
                   BoxShadow(
                     color: widget.barrierColor ?? Colors.grey
@@ -85,12 +92,15 @@ class _SelectionBottomSheetState extends State<SelectionBottomSheet> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              IconButton(
-                padding: const EdgeInsets.all(0),
-                iconSize: 20,
-                icon: widget.closeIcon!,
-                onPressed: () => Navigator.pop(context),
-              ),
+              if (widget.headerWidget != null)
+                widget.headerWidget!
+              else
+                IconButton(
+                  padding: const EdgeInsets.all(0),
+                  iconSize: 20,
+                  icon: widget.closeIcon!,
+                  onPressed: () => Navigator.pop(context),
+                ),
               if (!widget.hideSearch)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -100,6 +110,9 @@ class _SelectionBottomSheetState extends State<SelectionBottomSheet> {
                     onChanged: _filterElements,
                   ),
                 ),
+              SizedBox(
+                height: 16,
+              ),
               Expanded(
                 child: ListView(
                   children: [
@@ -140,33 +153,55 @@ class _SelectionBottomSheetState extends State<SelectionBottomSheet> {
 
   Widget _buildOption(CountryCode e) {
     return SizedBox(
-      width: 400,
-      child: Flex(
-        direction: Axis.horizontal,
-        children: <Widget>[
-          if (widget.showFlag!)
-            Flexible(
-              child: Container(
-                margin: const EdgeInsets.only(right: 16.0),
-                decoration: widget.flagDecoration,
-                clipBehavior:
-                    widget.flagDecoration == null ? Clip.none : Clip.hardEdge,
-                child: Image.asset(
-                  e.flagUri!,
-                  package: 'country_code_picker',
-                  width: widget.flagWidth,
+      child: Column(
+        children: [
+          Flex(
+            direction: Axis.horizontal,
+            children: <Widget>[
+              if (widget.showFlag!)
+                Flexible(
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 16.0),
+                    decoration: widget.flagDecoration ??
+                        BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Color(0xFFD9D9D9), // change as needed
+                            width: 1.5,
+                          ),
+                        ),
+                    clipBehavior: widget.flagDecoration == null
+                        ? Clip.none
+                        : Clip.hardEdge,
+                    child: ClipOval(
+                      child: Image.asset(
+                        e.flagUri!,
+                        package: 'country_code_picker',
+                        width: widget.flagWidth,
+                        height: widget.flagWidth,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                ),
+              Expanded(
+                flex: 4,
+                child: Text(
+                  widget.showCountryOnly!
+                      ? e.toCountryStringOnly()
+                      : e.toLongString(),
+                  overflow: TextOverflow.fade,
+                  style: widget.textStyle,
                 ),
               ),
-            ),
-          Expanded(
-            flex: 4,
-            child: Text(
-              widget.showCountryOnly!
-                  ? e.toCountryStringOnly()
-                  : e.toLongString(),
-              overflow: TextOverflow.fade,
-              style: widget.textStyle,
-            ),
+            ],
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          Container(
+            height: 1,
+            color: Color(0xFFF2F2FA),
           ),
         ],
       ),

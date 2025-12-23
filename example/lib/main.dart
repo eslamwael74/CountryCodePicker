@@ -89,7 +89,8 @@ class MyAppState extends State<MyApp> {
       ],
       localizationsDelegates: const [
         CountryLocalizations.delegate,
-       /// CountryLocalizations.getDelegate(enableLocalization: false),  // For no localization only english just declare delegate this way.
+
+        /// CountryLocalizations.getDelegate(enableLocalization: false),  // For no localization only english just declare delegate this way.
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
@@ -109,7 +110,56 @@ class MyAppState extends State<MyApp> {
                 margin: const EdgeInsets.symmetric(horizontal: 6),
                 comparator: (a, b) => b.name!.compareTo(a.name!),
                 //Get the country information relevant to the initial selection
-                onInit: (code) => debugPrint("on init ${code?.name} ${code?.dialCode} ${code?.name}"),
+                onInit: (code) => debugPrint(
+                    "on init ${code?.name} ${code?.dialCode} ${code?.name}"),
+                pickerStyle: PickerStyle.bottomSheet,
+                searchStyle: TextStyle(),
+                searchDecoration: InputDecoration(
+                    hintText: 'Search country',
+                    hintStyle: const TextStyle(
+                      color: Color(0xFF9E9E9E),
+                      fontSize: 14,
+                    ),
+                    suffixIcon: const Icon(
+                      Icons.search,
+                      color: Color(0xFF9E9E9E),
+                    ),
+                    prefix: SizedBox.shrink(),
+                    prefixIcon: SizedBox.shrink(),
+                    filled: true,
+                    fillColor: const Color(0xFFF2F4F7),
+                    // خلفية فاتحة زي الصورة
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 16,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(24), // شكل بيضاوي
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(24),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(24),
+                      borderSide: const BorderSide(
+                        color: Color(0xFFB0BEC5),
+                        width: 1,
+                      ),
+                    )),
+                headerWidget: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Icon(Icons.map, size: 24, color: Colors.blue),
+                    SizedBox(width: 12),
+                    Text(
+                      'Select your country',
+                      style: TextStyle(fontSize: 16, color: Colors.blue),
+                    ),
+                  ],
+                ),
+                flagWidth: 24,
               ),
               CountryCodePicker(
                 hideHeaderText: true,
