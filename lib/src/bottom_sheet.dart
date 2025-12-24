@@ -78,15 +78,6 @@ class _SelectionBottomSheetState extends State<SelectionBottomSheet> {
                   topLeft: Radius.circular(16.0),
                   topRight: Radius.circular(16.0),
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: widget.barrierColor ?? Colors.grey
-                      ..withAlpha(255),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: const Offset(0, 3), // changes position of shadow
-                  ),
-                ],
               ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -161,7 +152,7 @@ class _SelectionBottomSheetState extends State<SelectionBottomSheet> {
               if (widget.showFlag!)
                 Flexible(
                   child: Container(
-                    margin: const EdgeInsets.only(right: 16.0),
+                    margin: const EdgeInsets.only(right: 16.0, left: 16.0),
                     decoration: widget.flagDecoration ??
                         BoxDecoration(
                           shape: BoxShape.circle,
