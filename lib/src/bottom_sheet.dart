@@ -94,7 +94,7 @@ class _SelectionBottomSheetState extends State<SelectionBottomSheet> {
                 ),
               if (!widget.hideSearch)
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: TextField(
                     style: widget.searchStyle,
                     decoration: widget.searchDecoration,
@@ -152,7 +152,7 @@ class _SelectionBottomSheetState extends State<SelectionBottomSheet> {
               if (widget.showFlag!)
                 Flexible(
                   child: Container(
-                    margin: const EdgeInsets.only(right: 16.0, left: 16.0),
+                    margin: const EdgeInsets.only(right: 8.0, left: 8.0),
                     decoration: widget.flagDecoration ??
                         BoxDecoration(
                           shape: BoxShape.circle,
