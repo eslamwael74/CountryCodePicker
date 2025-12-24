@@ -103,6 +103,7 @@ class MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               CountryCodePicker(
+                showCountryOnly: true,
                 onChanged: print,
                 // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
                 initialSelection: 'IT',

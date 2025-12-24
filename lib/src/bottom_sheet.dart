@@ -177,12 +177,26 @@ class _SelectionBottomSheetState extends State<SelectionBottomSheet> {
                 ),
               Expanded(
                 flex: 4,
-                child: Text(
-                  widget.showCountryOnly!
-                      ? e.toCountryStringOnly()
-                      : e.toLongString(),
-                  overflow: TextOverflow.fade,
-                  style: widget.textStyle,
+                child: Row(
+                  children: [
+                    Text(
+                      widget.showCountryOnly!
+                          ? e.toCountryStringOnly()
+                          : e.toLongString(),
+                      overflow: TextOverflow.fade,
+                      style: widget.textStyle,
+                    ),
+                    if (widget.showCountryOnly == true)
+                      const SizedBox(
+                        width: 4,
+                      ),
+                    if (widget.showCountryOnly == true)
+                      Text(
+                        e.toString(),
+                        overflow: TextOverflow.fade,
+                        style: widget.textStyle,
+                      ),
+                  ],
                 ),
               ),
             ],
